@@ -6,8 +6,8 @@ function Footer() {
     return (
         <footer>
             <img src="https://softuni.bg/Content/images/about-page/softuni.png" alt="" />
-            <p>Software University - JavaScript Back-End September 2019 Season</p>
-            <p>@2019 MoneyGone. All Rights Reserved &copy;</p>
+            <p>Software University - JavaScript React September 2019 Season</p>
+            <p>@2019 MoneyManager. All Rights Reserved &copy;</p>
         </footer>
     )
 
