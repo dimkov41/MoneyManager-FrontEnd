@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import './components/common/Navigation'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Navigation />, document.getElementById('root'));
