@@ -8,6 +8,7 @@ import ContextWrapper from './ContextWrapper';
 import Home from '../Home';
 import Header from './Header';
 import Footer from './Footer';
+import Register from '../Register';
 
 const Navigation = () => {
   return (
@@ -16,6 +17,7 @@ const Navigation = () => {
           <Header />
             <Switch>
               <Route path="/" exact component={Home} />
+              <Route path="/register" exact component={Register} />
             </Switch>
           <Footer />
         </Router>
