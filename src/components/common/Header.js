@@ -11,7 +11,7 @@ function Header() {
                     </li>
                 </ul>
                 {/* {{#if isLoggedIn}} */}
-            <ul>
+            {/* <ul>
                     <li>
                         <a class="right-floated" href="/user/profile">Pesho</a>
                     </li>
@@ -19,7 +19,7 @@ function Header() {
                     <li>
                         <a class="right-floated" href="/user/logout">Logout</a>
                     </li>
-                </ul>
+                </ul> */}
                 {/* {{ else}} */}
                 <ul>
                     <li>

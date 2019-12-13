@@ -2,7 +2,8 @@ import React from 'react'
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  NotFoundRoute
 } from "react-router-dom";
 import ContextWrapper from './ContextWrapper';
 import Home from '../Home';
@@ -18,6 +19,7 @@ const Navigation = () => {
             <Switch>
               <Route path="/" exact component={Home} />
               <Route path="/register" exact component={Register} />
+              <Route path="*" component={Home} />
             </Switch>
           <Footer />
         </Router>

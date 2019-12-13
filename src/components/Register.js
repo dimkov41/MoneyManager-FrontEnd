@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../resources/css/registerForm.css';
 
 class Register extends Component {
     constructor(props) {
@@ -6,44 +7,119 @@ class Register extends Component {
         this.state = {
             username: '',
             password: '',
-            repeatPassword: '',
+            confirm_password: '',
             amount: ''
         };
-    
+
+        this.handleBlur = this.handleBlur.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-      }
+    }
 
+    componentDidMount() {
+        console.log("Component mount")
+    }
 
     handleSubmit(event) {
+        if (!this.validateInputs()) {
+            event.preventDefault();
+            return false;
+        }
 
+        //call service
+    }
+
+    validateInputs() {
+        let { password, confirm_password, username, amount } = this.state;
+        console.log(password)
+        console.log(!password)
+        if (!password || !confirm_password || !username || !amount) {
+            document.getElementById("emptyError").style.display = "block"
+            return false;
+        }
+        if (this.state.password.length <= 8) {
+            document.getElementById("errorPassword").style.display = "block"
+            return false;
+        } else {
+            document.getElementById("errorPassword").style.display = "none"
+        }
+        if (this.state.confirm_password !== this.state.password) {
+            document.getElementById("errorConfirmPassword").style.display = "block"
+            return false;
+        } else {
+            document.getElementById("errorConfirmPassword").style.display = "none"
+        }
+        if (this.state.amount <= 0) {
+            document.getElementById("errorAmount").style.display = "block"
+            return false;
+        } else {
+            document.getElementById("errorAmount").style.display = "none"
+        }
+        return true;
     }
 
     handleChange(event) {
-        this.setState({[event.target.name]: event.target.value})
+        this.setState({ [event.target.name]: event.target.value });
+    }
+
+    handleBlur(event) {
+        switch (event.target.name) {
+            case "password":
+                if (event.target.value.length <= 8) {
+                    document.getElementById("errorPassword").style.display = "block"
+                } else {
+                    document.getElementById("errorPassword").style.display = "none"
+                }
+                break;
+            case "confirm_password":
+                if (event.target.value !== this.state.password) {
+                    document.getElementById("errorConfirmPassword").style.display = "block"
+                } else {
+                    document.getElementById("errorConfirmPassword").style.display = "none"
+                }
+                break;
+            case "amount":
+                if (event.target.value <= 0) {
+                    document.getElementById("errorAmount").style.display = "block"
+                } else {
+                    document.getElementById("errorAmount").style.display = "none"
+                }
+                break;
+        }
     }
 
     render() {
         return (
-            <div class="wrapper">
-                <form onSubmit={this.onSubmit}>
-                    <h1>Register</h1>
-                    <p>Personal info</p>
-                    <label for="username">Username</label>
-                    <input id="username" type="text" value={this.state.username} onChange={this.handleChange} placeholder="Username" name="username" />
-
-                    <label for="password">Password</label>
-                    <input id="password" type="password" value={this.state.password} onChange={this.handleChange} placeholder="Password" name="password"/>
-
-                    <label for="repeatPassword">Repeat Password</label>
-                    <input id="repeatPassword" type="password" value={this.state.repeatPassword} onChange={this.handleChange} placeholder="RepeatPassword" name="repeatPassword"/>
-                    <hr />
-                    <p>Account</p>
-                    <label for="usernmae">Amount</label>
-                    <input id="amount" type="text" value={this.state.amount} onChange={this.handleChange} placeholder="amount" name="amount"/>
-
-                    <button type="submit">Register</button>
-                </form>
+            <div className="wrapper">
+                <div className="formWrapper">
+                    <form onSubmit={this.handleSubmit}>
+                        <span style={{ display: 'none' }} id="emptyError">Please fill all fields.</span>
+                        <h2>Sign Up</h2>
+                        <p>
+                            <label htmlFor="username" className="floatLabel">Username</label>
+                            <input id="username" type="text" value={this.state.username} onBlur={this.handleBlur} onChange={this.handleChange} placeholder="Username" name="username" />
+                        </p>
+                        <p>
+                            <label htmlFor="password" className="floatLabel">Password</label>
+                            <input id="password" type="password" value={this.state.password} onBlur={this.handleBlur} onChange={this.handleChange} placeholder="Password" name="password" />
+                            <span style={{ display: 'none' }} id="errorPassword">Enter a password longer than 8 characters</span>
+                        </p>
+                        <p>
+                            <label htmlFor="confirm_password" className="floatLabel">Repeat Password</label>
+                            <input id="confirm_password" type="password" value={this.state.repeatPassword} onBlur={this.handleBlur} onChange={this.handleChange} placeholder="Confirm password" name="confirm_password" />
+                            <span style={{ display: 'none' }} id="errorConfirmPassword">Your passwords do not match</span>
+                        </p>
+                        <hr />
+                        <p>
+                            <label htmlFor="amount" className="floatLabel">Amount</label>
+                            <input id="amount" type="number" value={this.state.amount} onBlur={this.handleBlur} onChange={this.handleChange} placeholder="amount" name="amount" />
+                            <span style={{ display: 'none' }} id="errorAmount">Amount should be positive number</span>
+                        </p>
+                        <p>
+                            <input type='submit' value='Create My Account' id='submit' />
+                        </p>
+                    </form>
+                </div>
             </div>
         )
     }
