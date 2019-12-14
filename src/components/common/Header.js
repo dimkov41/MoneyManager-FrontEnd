@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { logout } from '../../actions/auth.actions';
+import { logout, isAuthenticated } from '../../actions/auth.actions';
 
 class Header extends Component {
     componentDidMount() {
@@ -13,6 +13,27 @@ class Header extends Component {
     }
 
     render() {
+        const { isAuthenticated } = this.props;
+        let ul;
+        if (isAuthenticated()) {
+            let username = window.localStorage.getItem('username');
+            ul = <ul>
+                <li>
+                    <a className="right-floated" href="/user/profile">Welcome, {username}</a>
+                </li>
+
+                <li>
+                    <a className="right-floated" href="/logout">Logout</a>
+                </li>
+            </ul>;
+        } else {
+            ul = <ul>
+                <li>
+                    <a className="right-floated" href="login">Login</a>
+                </li>
+            </ul>;
+        }
+        
         return (
             <header>
                 <nav>
@@ -21,33 +42,16 @@ class Header extends Component {
                             <a id="home" className="left-floated" href="/">MoneyManager</a>
                         </li>
                     </ul>
-                    {/* {{#if isLoggedIn}} */}
-                    {/* <ul>
-                    <li>
-                        <a class="right-floated" href="/user/profile">Pesho</a>
-                    </li>
-
-                    <li>
-                        <a class="right-floated" href="/user/logout">Logout</a>
-                    </li>
-                </ul> */}
-                    {/* {{ else}} */}
-                    <ul>
-                        <li>
-                            <a className="right-floated" href="login">Login</a>
-                        </li>
-                    </ul>
-                    {/* {{/if}} */}
+                    {ul}
                 </nav>
             </header>
         )
     }
 }
 
-
 export default connect(
     null,
     {
-        logout
+        logout, isAuthenticated
     },
 )(Header);
