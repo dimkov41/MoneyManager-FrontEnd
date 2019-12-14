@@ -4,6 +4,7 @@ import { logout } from '../../actions/auth.actions';
 
 class Header extends Component {
     componentDidMount() {
+        const { logout } = this.props;
         const token = window.localStorage.getItem('token');
         const username = window.localStorage.getItem('username');
         if (!token || !username) {

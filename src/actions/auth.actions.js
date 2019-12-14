@@ -23,30 +23,38 @@ export const registerUser = (username, password, repeatPassword, amount) => disp
 };
 
 export const loginUser = (username, password) => dispatch => {
-    if(!username || !password){
+    if (!username || !password) {
         document.getElementById("emptyError").style.display = "block"
         return;
     }
     service.loginUser(username, password)
-    .then((response) => {
-        if (response.error != null) {
-            document.getElementById("serverError").style.display = "block"
-            document.getElementById("serverError").innerHTML = response.error
-            return;
-        }
+        .then((response) => {
+            if (response.error != null) {
+                document.getElementById("serverError").style.display = "block"
+                document.getElementById("serverError").innerHTML = response.error
+                return;
+            }
 
-        const token = response.token;
-        authenticateUser(token, username);
-        dispatch(setUserData({ token, username }));
-        window.location = "/";
-    }).catch(() => {
-        document.getElementById("serverError").style.display = "block"
-    })
+            const token = response.token;
+            authenticateUser(token, username);
+            dispatch(setUserData({ token, username }));
+            window.location = "/";
+        }).catch(() => {
+            document.getElementById("serverError").style.display = "block"
+        })
+}
+
+export const isAuthenticated = () => dispatch => {
+    let token = window.localStorage.getItem('token');
+    let username = window.localStorage.getItem('username');
+    if(token && username) {
+        return true;
+    }
+    return false;
 }
 
 export const logout = () => dispatch => {
-    window.localStorage.setItem('token', null);
-    window.localStorage.setItem('username', null);
+    window.localStorage.clear();
     dispatch(clearUserData());
 }
 

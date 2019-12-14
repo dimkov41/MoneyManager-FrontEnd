@@ -8,7 +8,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        window.history.pushState({}, document.title, "/" + "");
+        window.history.pushState({}, document.title, "/");
     }
 
     render() {

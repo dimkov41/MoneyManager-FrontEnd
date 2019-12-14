@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import '../resources/css/authForm.css';
-import { validateInputs, registerUser } from '../actions/auth.actions';
+import { validateInputs, registerUser, isAuthenticated } from '../actions/auth.actions';
 
 class Register extends Component {
     constructor(props) {
@@ -12,14 +12,14 @@ class Register extends Component {
             confirm_password: '',
             amount: ''
         };
-
         this.handleBlur = this.handleBlur.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    componentDidMount() {
-        console.log("Component mount")
+        
+        const { isAuthenticated } = this.props;
+        if(isAuthenticated()) {
+            window.location = "/";
+        }
     }
 
     handleSubmit(event) {
@@ -59,6 +59,8 @@ class Register extends Component {
                 } else {
                     document.getElementById("errorAmount").style.display = "none"
                 }
+                break;
+            default:
                 break;
         }
     }
@@ -105,6 +107,6 @@ class Register extends Component {
 export default connect(
     null,
     {
-        validateInputs, registerUser
+        validateInputs, registerUser, isAuthenticated
     },
 )(Register);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import '../resources/css/authForm.css';
-import { loginUser } from '../actions/auth.actions';
+import { loginUser, isAuthenticated } from '../actions/auth.actions';
 
 class Login extends Component {
     constructor(props) {
@@ -10,13 +10,13 @@ class Login extends Component {
             username: '',
             password: '',
         };
-
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-    }
 
-    componentDidMount() {
-        console.log("Component mount")
+        const { isAuthenticated } = this.props;
+        if(isAuthenticated()) {
+            window.location = "/";
+        }
     }
 
     handleSubmit(event) {
@@ -57,9 +57,17 @@ class Login extends Component {
     }
 }
 
+const mapStateToProps = function(state) {
+    return {
+        loggedIn: state.auth.loggedIn,
+        username: state.auth.username
+    };
+};
+
+
 export default connect(
-    null,
+    mapStateToProps,
     {
-        loginUser
+        loginUser, isAuthenticated
     },
 )(Login);
