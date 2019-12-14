@@ -17,7 +17,7 @@ class Home extends Component {
                 <div className="homeHeader">
                     <h1>Start managing properly your money today!</h1>
                     <hr/>
-                    <a href="/register" class="button">Sign Up</a>
+                    <a href="/register" className="button">Sign Up</a>
                 </div>
             </div>
         )

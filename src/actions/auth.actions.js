@@ -22,6 +22,28 @@ export const registerUser = (username, password, repeatPassword, amount) => disp
         })
 };
 
+export const loginUser = (username, password) => dispatch => {
+    if(!username || !password){
+        document.getElementById("emptyError").style.display = "block"
+        return;
+    }
+    service.loginUser(username, password)
+    .then((response) => {
+        if (response.error != null) {
+            document.getElementById("serverError").style.display = "block"
+            document.getElementById("serverError").innerHTML = response.error
+            return;
+        }
+
+        const token = response.token;
+        authenticateUser(token, username);
+        dispatch(setUserData({ token, username }));
+        window.location = "/";
+    }).catch(() => {
+        document.getElementById("serverError").style.display = "block"
+    })
+}
+
 export const logout = () => dispatch => {
     window.localStorage.setItem('token', null);
     window.localStorage.setItem('username', null);

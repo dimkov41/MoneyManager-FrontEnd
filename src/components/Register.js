@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import '../resources/css/registerForm.css';
+import '../resources/css/authForm.css';
 import { validateInputs, registerUser } from '../actions/auth.actions';
 
 class Register extends Component {
@@ -94,6 +94,7 @@ class Register extends Component {
                         <p>
                             <input type='submit' value='Create My Account' id='submit' />
                         </p>
+                        <p style={{color: 'black', fontSize: '15px'}} >Already have account? <a href="/login">Login</a></p>
                     </form>
                 </div>
             </div>

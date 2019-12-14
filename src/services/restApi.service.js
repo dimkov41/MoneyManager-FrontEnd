@@ -20,6 +20,25 @@ const registerUser = async(username, password, repeatPassword, amount) => {
         .then(response => response.json());
 };
 
+const loginUser = async(username, password) => {
+    const props = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Request-Method': 'POST',
+            'Access-Control-Request-Headers': 'content-type',
+        },
+        body: JSON.stringify({
+            username,
+            password,
+        }),
+    }
+
+    return await fetch(config.url + config.loginUser, props)
+    .then(response => response.json());
+}
+
 export default {
-    registerUser
+    registerUser,
+    loginUser
 }

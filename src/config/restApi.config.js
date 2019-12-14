@@ -2,6 +2,7 @@ const env = 'local';
 
 const commonConfig = {
     registerUser: '/user/register',
+    loginUser: '/user/login'
     // authUri: '/auth',
     // verifySMSUri: '/users/verify/sms',
     // userStatus: '/users/status',
