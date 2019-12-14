@@ -1,27 +1,26 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { isAuthenticated } from '../actions/auth.actions';
+import AuthHome from './authenticated/AuthHome';
+import GuestHome from './guest/GuestHome';
 
 class Home extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        };
-    }
-
     componentDidMount() {
         window.history.pushState({}, document.title, "/");
     }
 
     render() {
-        return (
-            <div className="wrapper">
-                <div className="homeHeader">
-                    <h1>Start managing properly your money today!</h1>
-                    <hr/>
-                    <a href="/register" className="button">Sign Up</a>
-                </div>
-            </div>
-        )
+        let { isAuthenticated } = this.props;
+        if(isAuthenticated()){
+            return <AuthHome/>
+        }
+        return <GuestHome/>
     }
 }
 
-export default Home;
+export default connect(
+    null,
+    {
+        isAuthenticated
+    },
+)(Home);
