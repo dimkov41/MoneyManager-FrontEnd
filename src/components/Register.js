@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import '../resources/css/registerForm.css';
+import { validateInputs, registerUser } from '../actions/auth.actions';
 
 class Register extends Component {
     constructor(props) {
@@ -21,41 +23,14 @@ class Register extends Component {
     }
 
     handleSubmit(event) {
-        if (!this.validateInputs()) {
-            event.preventDefault();
+        const { validateInputs, registerUser } = this.props;
+        event.preventDefault();
+        if (!validateInputs(this.state)) {
             return false;
         }
 
-        //call service
-    }
-
-    validateInputs() {
-        let { password, confirm_password, username, amount } = this.state;
-        console.log(password)
-        console.log(!password)
-        if (!password || !confirm_password || !username || !amount) {
-            document.getElementById("emptyError").style.display = "block"
-            return false;
-        }
-        if (this.state.password.length <= 8) {
-            document.getElementById("errorPassword").style.display = "block"
-            return false;
-        } else {
-            document.getElementById("errorPassword").style.display = "none"
-        }
-        if (this.state.confirm_password !== this.state.password) {
-            document.getElementById("errorConfirmPassword").style.display = "block"
-            return false;
-        } else {
-            document.getElementById("errorConfirmPassword").style.display = "none"
-        }
-        if (this.state.amount <= 0) {
-            document.getElementById("errorAmount").style.display = "block"
-            return false;
-        } else {
-            document.getElementById("errorAmount").style.display = "none"
-        }
-        return true;
+        const { username, password, confirm_password, amount } = this.state;
+        registerUser(username, password, confirm_password, amount);
     }
 
     handleChange(event) {
@@ -93,6 +68,7 @@ class Register extends Component {
             <div className="wrapper">
                 <div className="formWrapper">
                     <form onSubmit={this.handleSubmit}>
+                        <span style={{ display: 'none' }} id="serverError">Internal server error!</span>
                         <span style={{ display: 'none' }} id="emptyError">Please fill all fields.</span>
                         <h2>Sign Up</h2>
                         <p>
@@ -125,4 +101,9 @@ class Register extends Component {
     }
 }
 
-export default Register;
+export default connect(
+    null,
+    {
+        validateInputs, registerUser
+    },
+)(Register);

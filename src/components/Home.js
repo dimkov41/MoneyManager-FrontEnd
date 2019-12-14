@@ -1,23 +1,27 @@
 import React, { Component } from 'react';
 
-class Register extends Component {
+class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
         };
     }
 
-    componentDidMount(){
+    componentDidMount() {
         window.history.pushState({}, document.title, "/" + "");
     }
 
     render() {
         return (
-            <div class="wrapper">
-
+            <div className="wrapper">
+                <div className="homeHeader">
+                    <h1>Start managing properly your money today!</h1>
+                    <hr/>
+                    <a href="/register" class="button">Sign Up</a>
+                </div>
             </div>
         )
     }
 }
 
-export default Register;
+export default Home;

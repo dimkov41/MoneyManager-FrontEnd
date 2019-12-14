@@ -1,3 +1,3 @@
 export default {
-    REGISTER_USER: 'REGISTER_USER',
+    SUCCESS_AUTH: 'SUCCESS_AUTH',
 }

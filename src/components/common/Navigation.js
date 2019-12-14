@@ -3,9 +3,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  NotFoundRoute
 } from "react-router-dom";
-import ContextWrapper from './ContextWrapper';
 import Home from '../Home';
 import Header from './Header';
 import Footer from './Footer';
@@ -13,7 +11,6 @@ import Register from '../Register';
 
 const Navigation = () => {
   return (
-      <ContextWrapper>
         <Router>
           <Header />
             <Switch>
@@ -23,7 +20,6 @@ const Navigation = () => {
             </Switch>
           <Footer />
         </Router>
-      </ContextWrapper>
   )
 }
 
