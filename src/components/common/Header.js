@@ -19,7 +19,19 @@ class Header extends Component {
             let username = window.localStorage.getItem('username');
             ul = <ul>
                 <li>
-                    <a className="right-floated" href="/user/profile">Welcome, {username}</a>
+                    <a style={{pointerEvents: 'none'}} className="right-floated" href="#">Welcome, {username}</a>
+                </li>
+
+                <li>
+                    <a className="right-floated" href="/">Home</a>
+                </li>
+
+                <li>
+                    <a className="right-floated" href="/profile">Profile</a>
+                </li>
+
+                <li>
+                    <a className="right-floated" href="/exchangeRate">Exchange Rate</a>
                 </li>
 
                 <li>

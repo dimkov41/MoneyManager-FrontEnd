@@ -71,7 +71,6 @@ class Register extends Component {
                 <div className="formWrapper">
                     <form onSubmit={this.handleSubmit}>
                         <span style={{ display: 'none' }} id="serverError">Internal server error!</span>
-                        <span style={{ display: 'none' }} id="emptyError">Please fill all fields.</span>
                         <h2>Sign Up</h2>
                         <p>
                             <label htmlFor="username" className="floatLabel">Username</label>

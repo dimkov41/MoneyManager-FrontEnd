@@ -19,12 +19,14 @@ export const registerUser = (username, password, repeatPassword, amount) => disp
             window.location = "/login";
         }).catch(() => {
             document.getElementById("serverError").style.display = "block"
+            document.getElementById("serverError").innerHTML = "Internal server error";
         })
 };
 
 export const loginUser = (username, password) => dispatch => {
     if (!username || !password) {
-        document.getElementById("emptyError").style.display = "block"
+        document.getElementById("serverError").style.display = "block";
+        document.getElementById("serverError").innerHTML = "Please fill all fields";
         return;
     }
     service.loginUser(username, password)
@@ -41,13 +43,14 @@ export const loginUser = (username, password) => dispatch => {
             window.location = "/";
         }).catch(() => {
             document.getElementById("serverError").style.display = "block"
+            document.getElementById("serverError").innerHTML = "Internal server error";
         })
 }
 
 export const isAuthenticated = () => dispatch => {
     let token = window.localStorage.getItem('token');
     let username = window.localStorage.getItem('username');
-    if(token && username) {
+    if (token && username) {
         return true;
     }
     return false;
@@ -61,7 +64,8 @@ export const logout = () => dispatch => {
 export const validateInputs = (state) => dispatch => {
     const { password, confirm_password, username, amount } = state;
     if (!password || !confirm_password || !username || !amount) {
-        document.getElementById("emptyError").style.display = "block"
+        document.getElementById("serverError").style.display = "block";
+        document.getElementById("serverError").innerHTML = "Please Fill all fields";
         return false;
     }
     if (password.length <= 8) {

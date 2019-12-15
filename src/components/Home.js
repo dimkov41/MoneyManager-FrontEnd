@@ -5,8 +5,7 @@ import AuthHome from './authenticated/AuthHome';
 import GuestHome from './guest/GuestHome';
 
 class Home extends Component {
-    componentDidMount() {
-        window.history.pushState({}, document.title, "/");
+    componentDidMount() {        
     }
 
     render() {

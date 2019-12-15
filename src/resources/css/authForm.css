@@ -87,3 +87,7 @@ form label.floatLabel {
   background-color: rgba(255, 255, 255, 0.8);
   font-size: 14px;
 }
+
+#exhangeRateInput {
+  outline: none;
+}

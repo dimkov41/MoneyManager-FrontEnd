@@ -3,12 +3,11 @@ const env = 'local';
 const commonConfig = {
     registerUser: '/user/register',
     loginUser: '/user/login',
-    createExpense: '/expense/create'
-    // authUri: '/auth',
-    // verifySMSUri: '/users/verify/sms',
-    // userStatus: '/users/status',
-    // authRefresh: '/auth/refresh',
-    // changePassword: '/users/change/pass'
+    userProfile: '/user/profile',
+    refill: '/user/refill',
+    createExpense: '/expense/create',
+    allExpenses: '/expense/all',
+    deleteExpense: '/expense/delete',
 };
 
 const umConfig = {

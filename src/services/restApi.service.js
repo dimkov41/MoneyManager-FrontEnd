@@ -33,8 +33,24 @@ const loginUser = async(username, password) => {
             password,
         }),
     }
-
     return await fetch(config.url + config.loginUser, props)
+    .then(response => response.json());
+}
+
+const userProfile = async(token) => {
+    const props = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Request-Method': 'POST',
+            'Access-Control-Request-Headers': 'content-type',
+        }, 
+        body: JSON.stringify({
+            token
+        }),
+    }
+
+    return await fetch(config.url + config.userProfile, props)
     .then(response => response.json());
 }
 
@@ -55,8 +71,67 @@ const createExpense = async(merchant, total, description, token) => {
     .then(response => response.json());
 }
 
+const allExpenses = async(token) => {
+    const props = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Request-Method': 'POST',
+            'Access-Control-Request-Headers': 'content-type',
+        }, 
+        body: JSON.stringify({
+            token
+        }),
+    }
+
+    return await fetch(config.url + config.allExpenses, props)
+    .then(response => response.json());
+}
+
+
+
+const deleteExpense = async(expenseId, token) => {
+    const props = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Request-Method': 'POST',
+            'Access-Control-Request-Headers': 'content-type',
+        }, 
+        body: JSON.stringify({
+            expenseId,
+            token
+        }),
+    }
+    
+    return await fetch(config.url + config.deleteExpense, props)
+    .then(response => response.json());
+}
+
+const refill = async(token, amount) => {
+    const props = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Request-Method': 'POST',
+            'Access-Control-Request-Headers': 'content-type',
+        }, 
+        body: JSON.stringify({
+            token,
+            amount
+        }),
+    }
+    
+    return await fetch(config.url + config.refill, props)
+    .then(response => response.json());
+}
+
 export default {
     registerUser,
     loginUser,
-    createExpense
+    createExpense,
+    allExpenses,
+    deleteExpense,
+    userProfile,
+    refill
 }
