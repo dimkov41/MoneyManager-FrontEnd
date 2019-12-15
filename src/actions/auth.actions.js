@@ -16,7 +16,7 @@ export const registerUser = (username, password, repeatPassword, amount) => disp
             const token = response.token;
             authenticateUser(token, username);
             dispatch(setUserData({ token, username }));
-            window.location = "/";
+            window.location = "/login";
         }).catch(() => {
             document.getElementById("serverError").style.display = "block"
         })

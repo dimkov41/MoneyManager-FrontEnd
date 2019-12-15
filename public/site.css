@@ -58,6 +58,7 @@ nav ul:nth-child(2) {
     background-size: cover;
     background-repeat: none;
     color: white;
+    text-align: center;
 }
 
 main p.guest-message {
@@ -389,7 +390,7 @@ footer p {
     margin-right: 5em;
 }
 
-.homeHeader .button{
+.button{
     background-color: #008CBA; /* Green */
     border: 2px solid #008CBA;
     color: white;
@@ -411,7 +412,7 @@ footer p {
     color: initial;
 }
 
-.homeHeader .button:hover {
+.button:hover {
     background-color: #223d58;
     color: white;
 }
